@@ -14,9 +14,9 @@
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
-      overflow: hidden;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
 
     h1 {
@@ -34,9 +34,9 @@
       width: 90%;
       height: 80vh;
       margin: 10px auto 30px auto;
-      overflow: hidden;
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      overflow: visible; /* permite scroll dentro del iframe */
     }
 
     iframe {
@@ -52,6 +52,7 @@
 
     iframe.active {
       opacity: 1;
+      z-index: 1;
     }
 
     .progress-bar {
@@ -70,56 +71,46 @@
       to { width: 100%; }
     }
 
-    /* Botones con íconos */
     .nav-button {
       position: fixed;
       bottom: 20px;
-      background: rgba(0, 102, 255, 0.8);
       color: white;
       border: none;
+      background: transparent;
       font-size: 2.5rem;
-      padding: 8px 12px;
-      border-radius: 50%;
       cursor: pointer;
-      transition: background 0.3s;
-      z-index: 1000;
+      z-index: 10;
     }
 
     .nav-button:hover {
-      background: rgba(0, 102, 255, 1);
+      color: #00bfff;
     }
 
-    #prev {
-      left: 30px;
-    }
-
-    #next {
-      right: 30px;
-    }
+    #prev { left: 30px; }
+    #next { right: 30px; }
   </style>
 </head>
 <body>
-
+<div class="progress-bar" id="progress"></div>
   <h1>Liga Robótica Neuquina</h1>
   <div class="frame-title" id="frameTitle">Sumo Robótico Controlado Infantil</div>
 
   <div class="frame-container">
-    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticojuvenil/module"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticoradiocontroladojuvenil/module"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticoinfantil/module"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticoautonomojuveniladultos/module"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module"></iframe>
-    <iframe src="https://challonge.com/es/minisumoroboticoautonomoinfantil/module"></iframe>
-    <iframe src="https://challonge.com/es/inisumoroboticoautonomojuveniladultos/module"></iframe>
-    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module"></iframe>
-    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module"></iframe>
-    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladojuveniladultos/module"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticojuvenil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoradiocontroladojuvenil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomojuveniladultos/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/inisumoroboticoautonomojuveniladultos/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladojuveniladultos/module" scrolling="auto"></iframe>
 
-    <div class="progress-bar" id="progress"></div>
+    
   </div>
 
-  <!-- Botones con íconos -->
   <button id="prev" class="nav-button">
     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
   </button>
@@ -149,7 +140,7 @@
     ];
 
     let current = 0;
-    const intervalTime = 10000; // 10 segundos
+    const intervalTime = 30000; // 30 segundos
     let autoChange;
 
     function showFrame(index) {
@@ -184,6 +175,13 @@
     prevBtn.addEventListener("click", () => {
       prevFrame();
       restartAuto();
+    });
+
+    // Pausar autoplay al interactuar con cualquier iframe
+    iframes.forEach(frame => {
+      frame.addEventListener("pointerdown", () => {
+        clearInterval(autoChange);
+      });
     });
 
     function startAuto() {
