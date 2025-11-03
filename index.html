@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liga Robótica Neuquina</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .frame-title {
+      margin: 10px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .frame-container {
+      position: relative;
+      width: 90%;
+      height: 80vh;
+      margin: 10px auto 30px auto;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    iframe.active {
+      opacity: 1;
+    }
+
+    .progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 5px;
+      background-color: #007bff;
+      border-radius: 0 10px 10px 0;
+      animation: progress linear;
+    }
+
+    @keyframes progress {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* Botones con íconos */
+    .nav-button {
+      position: fixed;
+      bottom: 20px;
+      background: rgba(0, 102, 255, 0.8);
+      color: white;
+      border: none;
+      font-size: 2.5rem;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 1000;
+    }
+
+    .nav-button:hover {
+      background: rgba(0, 102, 255, 1);
+    }
+
+    #prev {
+      left: 30px;
+    }
+
+    #next {
+      right: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Liga Robótica Neuquina</h1>
+  <div class="frame-title" id="frameTitle">Sumo Robótico Controlado Infantil</div>
+
+  <div class="frame-container">
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticojuvenil/module"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoradiocontroladojuvenil/module"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticoinfantil/module"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomojuveniladultos/module"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoautonomoinfantil/module"></iframe>
+    <iframe src="https://challonge.com/es/inisumoroboticoautonomojuveniladultos/module"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladoinfantil/module"></iframe>
+    <iframe src="https://challonge.com/es/minisumoroboticoradiocontroladojuveniladultos/module"></iframe>
+
+    <div class="progress-bar" id="progress"></div>
+  </div>
+
+  <!-- Botones con íconos -->
+  <button id="prev" class="nav-button">
+    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+  </button>
+  <button id="next" class="nav-button">
+    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+  </button>
+
+  <script>
+    const iframes = document.querySelectorAll("iframe");
+    const progress = document.getElementById("progress");
+    const nextBtn = document.getElementById("next");
+    const prevBtn = document.getElementById("prev");
+    const frameTitle = document.getElementById("frameTitle");
+
+    const titles = [
+      "Sumo Robótico Controlado Infantil",
+      "Fútbol Robótico Juvenil",
+      "Sumo Robótico Radiocontrolado Juvenil",
+      "Fútbol Robótico Infantil",
+      "Sumo Robótico Autónomo Juvenil/Adultos",
+      "Sumo Robótico Autónomo Infantil",
+      "Mini Sumo Robótico Autónomo Infantil",
+      "Ini Sumo Robótico Autónomo Juvenil/Adultos",
+      "Mini Sumo Robótico Radiocontrolado Infantil",
+      "Mini Sumo Robótico Radiocontrolado Infantil",
+      "Mini Sumo Robótico Radiocontrolado Juvenil/Adultos"
+    ];
+
+    let current = 0;
+    const intervalTime = 10000; // 10 segundos
+    let autoChange;
+
+    function showFrame(index) {
+      iframes.forEach((frame, i) => {
+        frame.classList.toggle("active", i === index);
+      });
+      frameTitle.textContent = titles[index];
+      resetProgress();
+    }
+
+    function resetProgress() {
+      progress.style.animation = "none";
+      progress.offsetHeight; // forzar reflow
+      progress.style.animation = `progress ${intervalTime}ms linear`;
+    }
+
+    function nextFrame() {
+      current = (current + 1) % iframes.length;
+      showFrame(current);
+    }
+
+    function prevFrame() {
+      current = (current - 1 + iframes.length) % iframes.length;
+      showFrame(current);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      nextFrame();
+      restartAuto();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      prevFrame();
+      restartAuto();
+    });
+
+    function startAuto() {
+      autoChange = setInterval(nextFrame, intervalTime);
+      resetProgress();
+    }
+
+    function restartAuto() {
+      clearInterval(autoChange);
+      startAuto();
+    }
+
+    startAuto();
+  </script>
+</body>
+</html>
