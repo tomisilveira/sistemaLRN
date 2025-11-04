@@ -1,34 +1,49 @@
-/* Styles extraídos de index.html */
+/* Estilos principales */
 body {
-  background-color: #111;
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
   overflow: hidden;
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-h1 {
-  margin-top: 20px;
+/* Fondo dinámico según ancho de pantalla */
+@media (max-width: 768px) {
+  body {
+    background-image: url('fondo_mobile.png');
+  }
+}
+@media (min-width: 769px) {
+  body {
+    background-image: url('fondo_web.png');
+  }
 }
 
+/* Título del frame */
 .frame-title {
-  margin: 10px 0;
+  margin: 40px 0 15px 0; /* lo bajamos un poco más */
   font-size: 1.5rem;
   font-weight: bold;
+  color: #00bfff;
 }
 
+/* Contenedor del iframe */
 .frame-container {
   position: relative;
-  width: 90%;
-  height: 80vh;
-  margin: 10px auto 30px auto;
+  width: 85%; /* un poco más chico para dejar ver el fondo */
+  height: 70vh; /* lo reducimos un poco */
+  margin: 0 auto 30px auto;
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  overflow: visible; /* permite scroll dentro del iframe */
+  overflow: visible;
 }
 
+/* Iframe */
 iframe {
   position: absolute;
   top: 0;
@@ -45,6 +60,7 @@ iframe.active {
   z-index: 1;
 }
 
+/* Barra de progreso */
 .progress-bar {
   position: absolute;
   bottom: 0;
@@ -61,6 +77,7 @@ iframe.active {
   to { width: 100%; }
 }
 
+/* Botones de navegación */
 .nav-button {
   position: fixed;
   bottom: 20px;
@@ -70,6 +87,7 @@ iframe.active {
   font-size: 2.5rem;
   cursor: pointer;
   z-index: 10;
+  transition: color 0.3s;
 }
 
 .nav-button:hover {
