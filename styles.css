@@ -26,7 +26,7 @@ body {
 
 /* Título del frame */
 .frame-title {
-  margin: 40px 0 15px 0; /* lo bajamos un poco más */
+  margin: 40px 0 15px 0;
   font-size: 1.5rem;
   font-weight: bold;
   color: #00bfff;
@@ -35,8 +35,8 @@ body {
 /* Contenedor del iframe */
 .frame-container {
   position: relative;
-  width: 85%; /* un poco más chico para dejar ver el fondo */
-  height: 70vh; /* lo reducimos un poco */
+  width: 85%;
+  height: 70vh;
   margin: 0 auto 30px auto;
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
@@ -80,7 +80,7 @@ iframe.active {
 /* Botones de navegación */
 .nav-button {
   position: fixed;
-  bottom: 20px;
+  bottom: 15px;
   color: white;
   border: none;
   background: transparent;
@@ -96,3 +96,25 @@ iframe.active {
 
 #prev { left: 30px; }
 #next { right: 30px; }
+
+/* 🔧 Ajustes específicos para móviles */
+@media (max-width: 768px) {
+  .frame-title {
+    font-size: 1.1rem;
+    margin: 25px 0 10px 0;
+  }
+
+  .frame-container {
+    width: 90%;
+    height: 55vh; /* reducimos altura para no tapar los logos */
+    margin-bottom: 60px; /* más espacio antes del borde inferior */
+  }
+
+  .nav-button {
+    font-size: 2rem;
+    bottom: 10px;
+  }
+
+  #prev { left: 20px; }
+  #next { right: 20px; }
+}
