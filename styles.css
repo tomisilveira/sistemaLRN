@@ -5,7 +5,6 @@ body {
   font-family: Arial, sans-serif;
   color: white;
   text-align: center;
-  overflow: hidden;
   background-color: #111;
   background-size: cover;
   background-position: center;
@@ -26,8 +25,8 @@ body {
 
 /* Título del frame */
 .frame-title {
-  margin: 40px 0 15px 0;
-  font-size: 1.5rem;
+  margin: 20px 0 10px 0;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #00bfff;
 }
@@ -35,12 +34,15 @@ body {
 /* Contenedor del iframe */
 .frame-container {
   position: relative;
-  width: 85%;
-  height: 70vh;
-  margin: 0 auto 30px auto;
+  width: 90%;
+  max-width: 1100px;
+  height: 82vh; /* 📈 más alto */
+  max-height: 850px;
+  margin: 0 auto 40px auto;
   border-radius: 16px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  overflow: visible;
+  box-shadow: 0 0 25px rgba(0,0,0,0.45);
+  overflow: hidden;
+  background-color: #000;
 }
 
 /* Iframe */
@@ -66,8 +68,8 @@ iframe.active {
   bottom: 0;
   left: 0;
   width: 0%;
-  height: 5px;
-  background-color: #007bff;
+  height: 6px;
+  background: linear-gradient(90deg, #00bfff, #007bff);
   border-radius: 0 10px 10px 0;
   animation: progress linear;
 }
@@ -79,12 +81,12 @@ iframe.active {
 
 /* Botones de navegación */
 .nav-button {
-  position: fixed;
-  bottom: 15px;
+  position: absolute;
+  bottom: -55px;
   color: white;
   border: none;
   background: transparent;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   cursor: pointer;
   z-index: 10;
   transition: color 0.3s;
@@ -94,25 +96,26 @@ iframe.active {
   color: #00bfff;
 }
 
-#prev { left: 30px; }
-#next { right: 30px; }
+#prev { left: 25px; }
+#next { right: 25px; }
 
-/* 🔧 Ajustes específicos para móviles */
+/* 🔧 Ajustes para móviles */
 @media (max-width: 768px) {
   .frame-title {
     font-size: 1.1rem;
-    margin: 25px 0 10px 0;
+    margin: 15px 0 8px 0;
   }
 
   .frame-container {
-    width: 90%;
-    height: 55vh; /* reducimos altura para no tapar los logos */
-    margin-bottom: 60px; /* más espacio antes del borde inferior */
+    width: 95%;
+    height: 72vh; /* 📱 más alto también */
+    max-height: 560px;
+    margin-bottom: 70px;
   }
 
   .nav-button {
-    font-size: 2rem;
-    bottom: 10px;
+    font-size: 2.2rem;
+    bottom: -45px;
   }
 
   #prev { left: 20px; }
