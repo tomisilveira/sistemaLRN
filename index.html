@@ -15,16 +15,16 @@
   <div class="frame-title" id="frameTitle">Sumo Robótico Controlado Infantil</div>
 
   <div class="frame-container">
-    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticocontroladoadultos/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticoadulto/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticomenores/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/minisumocontroladoadulto/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/minisumoautonomoadulto/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/minisumoautonomoinfantil/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticoautonomoadulto/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module" scrolling="auto" allowtransparency="true"></iframe>
-    <iframe src="https://challonge.com/es/minisumocontroladoinfantil/module" scrolling="auto" allowtransparency="true"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoadultos/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticomenores/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumocontroladoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoautonomoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumocontroladoinfantil/module" scrolling="auto"></iframe>
   </div>
 
   <button id="prev" class="nav-button">
@@ -60,7 +60,7 @@
 
     function showFrame(index) {
       iframes.forEach((frame, i) => {
-        frame.classList.toggle("active", i === index);
+        frame.style.display = i === index ? "block" : "none";
       });
       frameTitle.textContent = titles[index];
       resetProgress();
@@ -92,13 +92,6 @@
       restartAuto();
     });
 
-    // Pausar autoplay al interactuar con cualquier iframe
-    iframes.forEach(frame => {
-      frame.addEventListener("pointerdown", () => {
-        clearInterval(autoChange);
-      });
-    });
-
     function startAuto() {
       autoChange = setInterval(nextFrame, intervalTime);
       resetProgress();
@@ -109,6 +102,7 @@
       startAuto();
     }
 
+    showFrame(current);
     startAuto();
   </script>
 </body>
