@@ -12,19 +12,19 @@
 <body>
 <div class="progress-bar" id="progress"></div>
   
-  <div class="frame-title" id="frameTitle">Sumo Robótico Controlado Infantil</div>
+  <div class="frame-title" id="frameTitle">Sumo Robótico Controlado Adultos</div>
 
   <div class="frame-container">
-    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" class="active" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/sumoroboticocontroladoadultos/module" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticoadulto/module" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/futbolroboticomenores/module" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/minisumocontroladoadulto/module" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/minisumoautonomoadulto/module" scrolling="auto"></iframe>
-    <iframe src="https://challonge.com/es/minisumoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoadultos/module" class="active" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/sumoroboticocontroladoinfantil/module" scrolling="auto"></iframe>
     <iframe src="https://challonge.com/es/sumoroboticoautonomoadulto/module" scrolling="auto"></iframe>
     <iframe src="https://challonge.com/es/sumoroboticoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoautonomoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumoautonomoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/minisumocontroladoadulto/module" scrolling="auto"></iframe>
     <iframe src="https://challonge.com/es/minisumocontroladoinfantil/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticoadulto/module" scrolling="auto"></iframe>
+    <iframe src="https://challonge.com/es/futbolroboticomenores/module" scrolling="auto"></iframe>
   </div>
 
   <button id="prev" class="nav-button">
@@ -42,16 +42,16 @@
     const frameTitle = document.getElementById("frameTitle");
 
     const titles = [
-      "Sumo Robótico Controlado Infantil",
       "Sumo Robótico Controlado Adultos",
-      "Fútbol Robótico Adultos",
-      "Fútbol Robótico Menores",
-      "Mini Sumo Controlado Adultos",
-      "Mini Sumo Autónomo Adultos",
-      "Mini Sumo Autónomo Infantil",
+      "Sumo Robótico Controlado Infantil",
       "Sumo Robótico Autónomo Adultos",
       "Sumo Robótico Autónomo Infantil",
-      "Mini Sumo Controlado Infantil"
+      "Mini Sumo Autónomo Adultos",
+      "Mini Sumo Autónomo Infantil",
+      "Mini Sumo Controlado Adultos",
+      "Mini Sumo Controlado Infantil",
+      "Fútbol Robótico Adultos",
+      "Fútbol Robótico Menores"
     ];
 
     let current = 0;
@@ -68,7 +68,7 @@
 
     function resetProgress() {
       progress.style.animation = "none";
-      progress.offsetHeight; // forzar reflow
+      progress.offsetHeight; // Forzar reflow
       progress.style.animation = `progress ${intervalTime}ms linear`;
     }
 
